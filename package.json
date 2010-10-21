@@ -1,0 +1,11 @@
+{
+  'name':'ampq-examples',
+  'author': 'James Carr <james.r.carr@gmail.com>',
+  'description':'An example app to demo amqp',
+  'version':'0.0.1',
+  'dependencies':{
+    'amqp':'0.0.2',
+    'express':'1.0.0rc4',
+    'socket.io':'0.5.3'
+  }
+}
