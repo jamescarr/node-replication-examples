@@ -1,22 +1,32 @@
+var express = require ('express')
+var io = require ('socket.io')
+var connect = require ('connect')
+
+var port = parseInt(process.argv[2]) || 8080
+
 var app = express.createServer();
 
-app.configure(function(){
-  app.set('views', __dirname + '/views');
-  app.use(connect.bodyDecoder());
-  app.use(connect.methodOverride());
-  app.use(connect.compiler({ src: __dirname + '/public', enable: ['less'] }));
-  app.use(app.router);
-  app.use(connect.staticProvider(__dirname + '/public'));
-});
-
-app.configure('development', function(){
-  app.use(connect.errorHandler({ dumpExceptions: true, showStack: true })); 
-});
-
-app.configure('production', function(){
-     app.use(connect.errorHandler()); 
-});
+var posted_messages = []
 
 app.get('/', function(req, res){
-  res.render('index');
+  res.render('index.haml', {
+    locals:{
+      port:port,
+      messages:posted_messages
+    }
+  });
 });
+
+app.post('/', function(req, res){
+   posted_messages.push(req.param('message'))
+   res.redirect('/')
+});
+
+app.listen(port)
+
+var socket = io.listen(app)
+socket.on('connection', function(client){
+  client.on('message', function(message){
+    socket.broadcast(message, client.sessionId)
+  })
+})
