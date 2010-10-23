@@ -1,6 +1,8 @@
 var express = require ('express')
 var io = require ('socket.io')
 var connect = require ('connect')
+var amqp = require ('amqp')
+
 
 var port = parseInt(process.argv[2]) || 8080
 
@@ -23,10 +25,3 @@ app.post('/', function(req, res){
 });
 
 app.listen(port)
-
-var socket = io.listen(app)
-socket.on('connection', function(client){
-  client.on('message', function(message){
-    socket.broadcast(message, client.sessionId)
-  })
-})

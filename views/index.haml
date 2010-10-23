@@ -1,0 +1,15 @@
+%h1 Simple Websocket Based Amqp Demo
+
+%p Connected on host 
+  .port= port
+
+
+%form{action:'/', method:'post'}
+  %input{type:'text', name:'message'}
+  %input{type:'submit'}
+
+%pre#output
+
+%ul#posted_messages
+  :each message in messages
+    %li= message
