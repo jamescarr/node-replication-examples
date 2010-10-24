@@ -2,7 +2,7 @@ var http  = require ('http')
 var sys = require ('sys')
 
 
-var hosts = linkedList([8081, 8082]) // convert to heroku apps
+var hosts = linkedList([8081, 8082, 8083, 8084]) // convert to heroku apps
 
 function linkedList (arr) {
   return {
