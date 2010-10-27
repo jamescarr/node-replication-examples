@@ -7,6 +7,6 @@
     'amqp':'0.0.2',
     'express':'1.0.0rc4',
     'socket.io':'0.5.3',
-    'hamljs':'0.4.5'
+    'haml':'0.2.5'
   }
 }
